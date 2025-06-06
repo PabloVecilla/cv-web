@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pablo Vecilla - CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+/* Contenedor general en dos columnas */
+.container {
+  display: flex;
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Lucida Sans', Verdana, Geneva, sans-serif;
+}
+#cv {
+  padding: 20px; 
+  box-sizing: border-box; 
+}
+
+/* Sidebar: columna izquierda, 30% */
+.sidebar {
+  background-color: #f5f5f5; /* gris muy claro */
+  width: 30%;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  color: #222;
+}
+
+/* Foto circular */
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+/* Nombre y subtítulo centrados */
+.sidebar h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin: 0;
+}
+
+/* Contacto en columna */
+.contact-info {
+  width: 100%;
+}
+
+.contact-info p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.contact-info svg.icon {
+  fill: #333;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+/* About me */
+.about-me {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.about-me h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.3rem;
+}
+
+.about-me p {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.4;
+}
+
+/* Main content: columna derecha, 70% */
+.main-content {
+  width: 70%;
+  padding: 2rem 2rem;
+  box-sizing: border-box;
+  color: #222;
+}
+/* Botones EN/ES */
+.lang-toggle{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+.lang-toggle button{
+    background: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: #333;
+    box-shadow: none;
+}
+.lang-toggle button:hover{
+    color: #666;
+}
+
+.timeline-section {
+  margin-bottom: 2rem;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background-color: black;
+  border-radius: 50%;
+  flex-shrink: 0;
+  /* Sin línea vertical */
+}
+
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-content p{
+    margin-top: 0;
+}
+
+.periodo {
+  font-weight: 400;
+  background-color:  #444;
+  color: white;
+  margin: 0 5px 0.2rem 0;
+  font-size: 0.95rem;
+  padding: 2px 5px 2px 2px ;
+}
+
+.skills-section {
+  margin-top: 2rem;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skill-tag {
+  background: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 12px;
+  width: 120px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  font-weight: 600;
+  color: #222;
+  user-select: none;
+}
+
+.skill-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: black;
+  width: 0;
+  border-radius: 0 0 12px 12px;
+  transition: width 0.5s ease;
+}
+
+.pdf-button{
+    margin-top: 30px;
+}
+
+/* Cuando hago hover en la etiqueta relleno la barra con el nivel */
+.skill-tag:hover .skill-bar {
+  width: attr(data-level percentage); /* No funciona en CSS, vamos a usar JS para este efecto */
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .profile-pic {
+    width: 80px;
+    height: 80px;
+    margin: 0;
+  }
+
+  .sidebar-text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .sidebar h1 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+
+  .about-me {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .skills-tags {
+    justify-content: center;
+  }
+}
+
+@media print {
+  body {
+    zoom: 0.75; /* Redución del contenido para encajarlo en un a4 */
+  }
+}
+
+@media screen {
+  #cv {
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    margin: auto;
+    border: 1px solid lightgray; /* just to visualize */
+  }
+}
+
+  </style>
+
+</head>
+    <body>
+        <div class="container" id="cv">
+          <aside class="sidebar">
+            <img src="img/fotCv.jpeg" alt="Pablo Vecilla" class="profile-pic">
+            <div class="sidebar-text">
+            <h1>Pablo Vecilla</h1>
+            <p data-lang="en" class="subtitle">Web Developer with an Advertising Background</p>
+            <p data-lang="es" class="subtitle">Desarrollador web con trayectoria en comunicación</p>
+            <div class="contact-info">
+              <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
+              </svg>pablovecilla8@gmail.com</p>
+              <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.3 1.3 0 0 0-.37.265.3.3 0 0 0-.057.09V14l.002.008.016.033a.6.6 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.6.6 0 0 0 .146-.15l.015-.033L12 14v-.004a.3.3 0 0 0-.057-.09 1.3 1.3 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465s-2.462-.172-3.34-.465c-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411"/>
+              </svg></svg>Madrid, España</p>
+              <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone-fill" viewBox="0 0 16 16">
+                <path d="M3 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm6 11a1 1 0 1 0-2 0 1 1 0 0 0 2 0"/>
+              </svg>653 906 706</p>
+            </div>
+      
+            <section class="about-me">
+              <h2 data-lang="en">About me</h2>
+              <h2 data-lang="es">Sobre mi</h2>
+              <p data-lang="en">I’m a creative and tech-driven professional transitioning from advertising to web development. My background in storytelling and design helps me build thoughtful, user-focused digital experiences in the projects I am developing right now. 100% focused on learning and building my professional profile in this amazing sector.</p>
+              <p data-lang="es">Soy una persona creativa y entusiasta, dando el salto de escribir textos publicitarios a escribir código. Desarrollando proyectos reales desde que me ha sido posible y con todas las ganas de seguir aprendiendo y desarrollándome en un sector tan despierto e interesante como este. </p>
+            </section>
+
+            <button class="pdf-button" data-lang="en" onclick="downloadPDF()">Download PDF</button>
+            <button class="pdf-button" data-lang="es" onclick="downloadPDF()">Descargar PDF</button>
+          </aside>
+        
+          <main class="main-content">
+            <!-- Botones EN/ES -->
+            <div class="lang-toggle">
+                <button onclick="setLang('es')">ES</button>
+                <button onclick="setLang('en')">EN</button>
+              </div>
+            <!-- Estudios -->
+            <section class="timeline-section">
+                <h2 data-lang="en">Education</h2>
+                <h2 data-lang="es">Estudios</h2>
+                <div class="timeline">
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                      <p data-lang="en"><span class="periodo">2014 – 2018</span>Advertising & PR – UCM</p>
+                      <p data-lang="es"><span class="periodo">2014 – 2018</span>Publicidad y RR. PP. – UCM</p>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                      <p data-lang="en"><span class="periodo">2019 – 2020</span>Creativity Master – TheZinkProject</p>
+                      <p data-lang="es"><span class="periodo">2019 – 2020</span>Master en Creatividad – TheZinkProject</p>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p data-lang="en"><span class="periodo">2024 – 2025</span>FP3 - Web Development</p>
+                        <p data-lang="es"><span class="periodo">2024 – 2025</span>FP3 - Desarrollo Web</p>
+                    </div>
+                  </div>
+                </div>
+            </section>
+
+            <!-- Exp. laboral  -->
+              <section class="section">
+                <h2 data-lang="en">Work Experience</h2>
+                <h2 data-lang="es">Trayectoria</h2>
+                <div class="timeline">
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p data-lang="en"><span class="periodo">2018 – 2020</span> Trainee Copywriter</p>
+                      <p data-lang="es"><span class="periodo">2018 – 2020</span>Redactor Trainee</p>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p data-lang="en"><span class="periodo">2020 – 2022</span>Copywriter at Darwin & Verne</p>
+                        <p data-lang="es"><span class="periodo">2020 – 2022</span>Redactor creativo en Darwin & Verne</p>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                      <p data-lang="en"><span class="periodo">2022 – 2024</span>Freelance Copywriter</p>
+                      <p data-lang="es"><span class="periodo">2022 – 2024</span>Redactor Freelance</p>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p data-lang="en"><span class="periodo">2023 – 2025</span>Event Manager at Vilaplana</p>
+                        <p data-lang="es"><span class="periodo">2023 – 2025</span>Responsable de Eventos en Vilaplana</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            <!-- Skills -->
+              <section class="skills-section">
+                <h2>Skills</h2>
+                <div class="skills-tags">
+                  <div class="skill-tag" data-level="90%">
+                    <span>HTML</span>
+                    <div class="skill-bar"></div>
+                  </div>
+                  <div class="skill-tag" data-level="70%">
+                    <span>JavaScript</span>
+                    <div class="skill-bar"></div>
+                  </div>
+                  <div class="skill-tag" data-level="60%">
+                    <span>SQL</span>
+                    <div class="skill-bar"></div>
+                  </div>
+                  <div class="skill-tag" data-level="50%">
+                    <span>PHP</span>
+                    <div class="skill-bar"></div>
+                  </div>
+                  <div class="skill-tag" data-level="85%">
+                    <span>Copywriting</span>
+                    <div class="skill-bar"></div>
+                  </div>
+                  <div class="skill-tag" data-level="75%">
+                    <span>English</span>
+                    <div class="skill-bar"></div>
+                  </div>
+                </div>
+              </section>
+            </div>  
+        </main>
+        <div style="height: 20px;"></div>
+        </div>
+
+
+  <!-- PDF Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('cv');
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: 'CV_Pablo_Vecilla.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, scrollY:0 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: {mode: ['avoid-all', 'css', 'legacy']}
+      }; 
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+  <!-- JavaScript para animar las barras de % de las skills -->
+  <script>
+    document.querySelectorAll('.skill-tag').forEach(tag => {
+      tag.addEventListener('mouseenter', () => {
+        const level = tag.getAttribute('data-level');
+        tag.querySelector('.skill-bar').style.width = level;
+      });
+      tag.addEventListener('mouseleave', () => {
+        tag.querySelector('.skill-bar').style.width = '0';
+      });
+    });
+  </script>
+
+  <!-- JavaScript para los botones de lenguaje -->
+   <script>
+    function setLang(lang){
+        document.querySelectorAll('[data-lang]').forEach(el =>{ el.style.display = el.dataset.lang === lang ? 'block' : 'none';})
+    }
+    //Lenguaje por defecto 
+    setLang('es'); 
+</script>
+</body>
+</html>
+

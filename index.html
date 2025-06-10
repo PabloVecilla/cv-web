@@ -61,6 +61,7 @@
 /* Contacto en columna */
 .contact-info {
   width: 100%;
+  margin-top: 30px;
 }
 
 .contact-info p {
@@ -78,10 +79,10 @@
   min-height: 20px;
 }
 
-/* About me */
+/* About  */
 .about-me {
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 30px;
 }
 
 .about-me h2 {
@@ -123,6 +124,11 @@
     color: #666;
 }
 
+h2{
+  border-bottom: 1px solid grey;
+  margin-bottom: 30px;
+}
+
 .timeline-section {
   margin-bottom: 2rem;
 }
@@ -139,14 +145,6 @@
   gap: 1rem;
 }
 
-.timeline-dot {
-  width: 12px;
-  height: 12px;
-  background-color: black;
-  border-radius: 50%;
-  flex-shrink: 0;
-  /* Sin línea vertical */
-}
 
 .timeline-content {
   display: flex;
@@ -168,12 +166,19 @@
 
 .skills-section {
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: auto;
 }
 
 .skills-tags {
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem 5rem;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .skill-tag {
@@ -279,16 +284,41 @@
 }
 
 @media print {
-  body {
-    zoom: 0.75; /* Redución del contenido para encajarlo en un a4 */
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 794px;
+    height: 1123px; 
+    overflow: hidden; 
+    box-sizing: border-box;}
+
+  .skills-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .skill-tag .skill-bar {
+    width: attr(data-level);
+  }
+  .container {
+    width: 794px;
+    height: 1123px;
+    padding: 40px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  *{
+    box-sizing: border-box !important; 
   }
 }
+
 
 @media screen {
   #cv {
     width: 210mm;
     height: 297mm;
-    overflow: hidden;
     margin: auto;
     border: 1px solid lightgray; /* just to visualize */
   }
@@ -300,7 +330,7 @@
     <body>
         <div class="container" id="cv">
           <aside class="sidebar">
-            <img src="img/fotCv.jpeg" alt="Pablo Vecilla" class="profile-pic">
+            <img src="profile.jpeg" alt="Pablo Vecilla" class="profile-pic">
             <div class="sidebar-text">
             <h1>Pablo Vecilla</h1>
             <p data-lang="en" class="subtitle">Web Developer with an Advertising Background</p>
@@ -423,7 +453,6 @@
               </section>
             </div>  
         </main>
-        <div style="height: 20px;"></div>
         </div>
 
 
@@ -432,8 +461,13 @@
   <script>
     function downloadPDF() {
       const element = document.getElementById('cv');
+      // Fijar manualmente el ancho de las barras antes de imprimir
+      document.querySelectorAll('.skill-tag').forEach(tag => {
+        const level = tag.getAttribute('data-level');
+        tag.querySelector('.skill-bar').style.width = level;
+      });
       const opt = {
-        margin: [10, 10, 10, 10],
+        /*margin: [10, 10, 10, 10],*/
         filename: 'CV_Pablo_Vecilla.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, scrollY:0 },
@@ -462,7 +496,7 @@
         document.querySelectorAll('[data-lang]').forEach(el =>{ el.style.display = el.dataset.lang === lang ? 'block' : 'none';})
     }
     //Lenguaje por defecto 
-    setLang('es'); 
+    setLang('en'); 
 </script>
 </body>
 </html>
